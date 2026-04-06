@@ -1,118 +1,115 @@
-# Instagram Thrift Creator Store
+title Instagram Thrift Creator Store
 
-notation crows-feet
-typeface clean
-
-CUSTOMER {
- customer_id Int pk
- full_name String
- phone String
- instagram_handle String
- whatsapp_no String
- email String
- created_at DateTime
+CUSTOMER [icon: user, color: yellow] {
+  customer_id Int pk
+  full_name String
+  phone String
+  instagram_handle String
+  whatsapp_no String
+  email String
+  created_at DateTime
 }
 
-ADDRESS {
- address_id Int pk
- customer_id Int
- recipient_name String
- line1 String
- line2 String
- city String
- state String
- postal_code String
- country String
+ADDRESS [icon: map-pin, color: yellow] {
+  address_id Int pk
+  customer_id Int
+  recipient_name String
+  line1 String
+  line2 String
+  city String
+  state String
+  postal_code String
+  country String
 }
 
-CATEGORY {
- category_id Int pk
- category_name String
+CATEGORY [icon: tag, color: purple] {
+  category_id Int pk
+  category_name String
 }
 
-PRODUCT {
- product_id Int pk
- category_id Int
- product_name String
- description String
- product_type String
- is_active Boolean
- created_at DateTime
+PRODUCT [icon: package, color: blue] {
+  product_id Int pk
+  category_id Int
+  product_name String
+  description String
+  product_type String
+  is_active Boolean
+  created_at DateTime
 }
 
-THRIFT_PRODUCT {
- product_id Int pk
- brand String
- condition String
- thrift_source String
- acquired_date Date
+THRIFT_PRODUCT [icon: refresh-cw, color: blue] {
+  product_id Int pk
+  brand String
+  condition String
+  thrift_source String
+  acquired_date Date
 }
 
-HANDMADE_PRODUCT {
- product_id Int pk
- material_details String
- customizable Boolean
- care_instructions String
+HANDMADE_PRODUCT [icon: scissors, color: blue] {
+  product_id Int pk
+  material_details String
+  customizable Boolean
+  care_instructions String
 }
 
-PRODUCT_VARIANT {
- variant_id Int pk
- product_id Int
- sku_code String
- size String
- color String
- selling_price Decimal
- stock_qty Int
- variant_status String
+PRODUCT_VARIANT [icon: layers, color: blue] {
+  variant_id Int pk
+  product_id Int
+  sku_code String
+  size String
+  color String
+  selling_price Decimal
+  stock_qty Int
+  variant_status String
 }
 
-HANDMADE_BATCH {
- batch_id Int pk
- variant_id Int
- batch_date Date
- quantity_created Int
- batch_notes String
+HANDMADE_BATCH [icon: box, color: blue] {
+  batch_id Int pk
+  variant_id Int
+  batch_date Date
+  quantity_created Int
+  batch_notes String
 }
 
-CUSTOMER_ORDER {
- order_id Int pk
- customer_id Int
- address_id Int
- order_date Date
- order_source String
- order_status String
- subtotal Decimal
- shipping_fee Decimal
- total_amount Decimal
+CUSTOMER_ORDER [icon: shopping-cart, color: green] {
+  order_id Int pk
+  customer_id Int
+  address_id Int
+  order_date Date
+  order_source String
+  order_status String
+  subtotal Decimal
+  shipping_fee Decimal
+  total_amount Decimal
 }
 
-ORDER_ITEM {
- order_item_id Int pk
- order_id Int
- variant_id Int
- quantity Int
- unit_price Decimal
- line_total Decimal
+ORDER_ITEM [icon: list, color: green] {
+  order_item_id Int pk
+  order_id Int
+  variant_id Int
+  quantity Int
+  unit_price Decimal
+  line_total Decimal
 }
 
-PAYMENT {
- payment_id Int pk
- order_id Int
- payment_date Date
- amount Decimal
- payment_method String
- payment_status String
- transaction_reference String
+PAYMENT [icon: credit-card, color: orange] {
+  payment_id Int pk
+  order_id Int
+  payment_date Date
+  amount Decimal
+  payment_method String
+  payment_status String
+  transaction_reference String
 }
 
-SHIPMENT {
- shipment_id Int pk
- order_id Int
- courier_name String
- tracking_number String
- shipped_date Date
- delivered_date Date
- shipping_status String
+SHIPMENT [icon: truck, color: orange] {
+  shipment_id Int pk
+  order_id Int
+  courier_name String
+  tracking_number String
+  shipped_date Date
+  delivered_date Date
+  shipping_status String
 }
 
 ADDRESS.customer_id > CUSTOMER.customer_id
@@ -127,4 +124,3 @@ ORDER_ITEM.order_id > CUSTOMER_ORDER.order_id
 ORDER_ITEM.variant_id > PRODUCT_VARIANT.variant_id
 PAYMENT.order_id > CUSTOMER_ORDER.order_id
 SHIPMENT.order_id - CUSTOMER_ORDER.order_id
-
